@@ -6,13 +6,11 @@ ENV HOME /node
 ENV DEBIAN_FRONTEND noninteractive
 ENV PYTHONUNBUFFERED 1
 ENV PATH /usr/local/bin:$PATH
-ENV CROSSBAR_VERSION 0.13.2
+ENV CROSSBAR_VERSION 0.14.0
 
 RUN export PKGS='build-essential git libssl-dev' \
 	&& set -x \
 	&& apt-get update && apt-get install -y ${PKGS} --no-install-recommends \
-    # FIXME: due to bug with pip 8.1.2 (https://github.com/pypa/pip/issues/3667) , == should not be used.
-    && pip install -U pip==8.1.1 \
     && pip install crossbar==${CROSSBAR_VERSION} \
     #add our user and group
     && adduser --home /node --disabled-password --gecos "Crossbar.io Service" crossbar \
